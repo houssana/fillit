@@ -1,0 +1,85 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_functions.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rbullain <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/27 11:46:45 by rbullain          #+#    #+#             */
+/*   Updated: 2017/04/27 18:57:34 by houssana         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "headers.h"
+
+/*
+** description:
+*/
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+/*
+** description:
+*/
+
+void	ft_putstr(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		ft_putchar(str[i]);
+		i++;
+	}
+}
+
+/*
+** description:
+*/
+
+int		ft_mathmin(int x, int y)
+{
+	return ((x < y) ? x : y);
+}
+
+/*
+** description:
+*/
+
+int		ft_mathmax(int x, int y)
+{
+	return ((x > y) ? x : y);
+}
+
+/*
+** description:
+*/
+
+void	ft_memdel(void **ap)
+{
+	free(*ap);
+	*ap = NULL;
+}
+
+void		ft_putnbr(int n)
+{
+	long int nb;
+
+	nb = n;
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb = -nb;
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
+	}
+	else
+		ft_putchar(nb % 10 + '0');
+}
