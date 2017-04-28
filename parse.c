@@ -108,7 +108,7 @@ int			try_parse(char *buffer, int length, t_tetrim **tetrims)
 	pos = 0;
 	while (i < length)
 	{
-		if (buffer[i] == '\n')
+		if (buffer[i] != '\n')
 		{
 			if (i == 0)
 				return (0);
