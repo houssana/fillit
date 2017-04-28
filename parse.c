@@ -6,7 +6,7 @@
 /*   By: rbullain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 11:53:47 by rbullain          #+#    #+#             */
-/*   Updated: 2017/04/27 19:09:20 by houssana         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:17:20 by houssana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static int	are_adjacent(t_point *p1, t_point *p2)
 	if (p1->x == p2->x && (p1->y - p2->y) == -1)
 		links++;
 	if (p1->y == p2->y && (p1->x - p2->x) == 1)
-	   links++;
+		links++;
 	if (p1->y == p2->y && (p1->x - p2->x) == -1)
-	   links++;
+		links++;
 	return (links);
 }
 
@@ -80,8 +80,8 @@ static int	try_parse_points(char *buffer, int start, t_tetrim *tetrim)
 		{
 			if (count_points < 4 && buffer[start + i] == '#')
 			{
-				tetrim->points[count_points]->x = i % 5;
-				tetrim->points[count_points]->y = i / 5;
+				tetrim->points[count_points]->x = i / 5;
+				tetrim->points[count_points]->y = i % 5;
 				count_points++;
 			}
 			else if (buffer[start + i] != '.')

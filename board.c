@@ -6,7 +6,7 @@
 /*   By: rbullain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 11:42:32 by rbullain          #+#    #+#             */
-/*   Updated: 2017/04/27 19:08:36 by houssana         ###   ########.fr       */
+/*   Updated: 2017/04/28 16:54:58 by houssana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		print_board(t_board *board)
 		j = 0;
 		while (j < board->square)
 		{
-			ft_putchar(board->map[j][i]);
+			ft_putchar(board->map[i][j]);
 			j++;
 		}
 		ft_putchar('\n');

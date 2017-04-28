@@ -6,7 +6,7 @@
 /*   By: rbullain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 11:46:45 by rbullain          #+#    #+#             */
-/*   Updated: 2017/04/27 18:57:34 by houssana         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:10:34 by houssana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,23 +63,4 @@ void	ft_memdel(void **ap)
 {
 	free(*ap);
 	*ap = NULL;
-}
-
-void		ft_putnbr(int n)
-{
-	long int nb;
-
-	nb = n;
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		nb = -nb;
-	}
-	if (nb >= 10)
-	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
-	}
-	else
-		ft_putchar(nb % 10 + '0');
 }

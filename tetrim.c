@@ -6,7 +6,7 @@
 /*   By: rbullain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 12:02:03 by rbullain          #+#    #+#             */
-/*   Updated: 2017/04/27 19:06:44 by houssana         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:11:49 by houssana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 void		free_tetrim(t_tetrim *tetrim)
 {
 	int		i;
-	
-	
+
 	ft_memdel((void**)&(tetrim->root));
 	i = 0;
 	while (i < 4)

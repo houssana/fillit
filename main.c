@@ -6,7 +6,7 @@
 /*   By: rbullain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 11:40:11 by rbullain          #+#    #+#             */
-/*   Updated: 2017/04/27 19:12:10 by houssana         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:14:34 by houssana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ static t_tetrim	**create_tetrims(int size)
 	t_tetrim	**new;
 	int			i;
 
-	if (!(new = (t_tetrim**)malloc(size * sizeof(t_tetrim))) || size > 26)
+	if (size == 0 || size > 26)
+		return (NULL);
+	if (!(new = (t_tetrim**)malloc(size * sizeof(t_tetrim))))
 		return (NULL);
 	i = 0;
 	while (i < size)
@@ -100,9 +102,10 @@ int				main(int ac, char **as)
 	if (ac != 2)
 		return (msg_error(0, NULL, NULL, 0));
 	buffer = (char*)malloc(BUFFER_SIZE * sizeof(char));
-	if ((length = read_file(as[1], buffer)) == -1)
+	if ((length = read_file(as[1], buffer)) <= 0)
 		return (msg_error(1, buffer, NULL, 0));
-	tetrims = create_tetrims((length + 1) / 21);
+	if ((tetrims = create_tetrims((length + 1) / 21)) == NULL)
+		return (msg_error(1, buffer, NULL, 0));
 	if (try_parse(buffer, length, tetrims) == 0)
 		return (msg_error(2, buffer, tetrims, length));
 	solution = create_board((((length + 1) / 21) + 1) * 2);

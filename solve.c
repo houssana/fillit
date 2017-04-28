@@ -6,7 +6,7 @@
 /*   By: rbullain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 11:58:30 by rbullain          #+#    #+#             */
-/*   Updated: 2017/04/27 11:59:56 by rbullain         ###   ########.fr       */
+/*   Updated: 2017/04/28 17:16:27 by houssana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ static void	fillit_rcs(t_board *cur, t_board *sol, t_tetrim **tetrims, int pos)
 		{
 			if (is_valid(cur, i, j, tetrims[pos]) == 1)
 			{
-				fillit_rcs(cur, sol, tetrims, pos + 1);
+				if (calc_square(cur) < sol->square)
+					fillit_rcs(cur, sol, tetrims, pos + 1);
 				quit_tetrim(cur, i, j, tetrims[pos]);
 			}
 			j++;
