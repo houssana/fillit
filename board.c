@@ -6,7 +6,7 @@
 /*   By: rbullain <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/27 11:42:32 by rbullain          #+#    #+#             */
-/*   Updated: 2017/04/28 16:54:58 by houssana         ###   ########.fr       */
+/*   Updated: 2017/04/30 13:44:15 by houssana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ int			calc_square(t_board *board)
 
 	i = 0;
 	square = 0;
-	while (i < board->size)
+	while (i < board->square)
 	{
 		j = 0;
-		while (j < board->size)
+		while (j < board->square)
 		{
 			if (board->map[i][j] != '.' && (i > square || j > square))
 				square = ft_mathmax(i, j);
