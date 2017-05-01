@@ -15,8 +15,6 @@
 /*
 ** description:
 */
-int						optimal;
-long long int			counter;
 
 static void	quit_tetrim(t_board *cur, int i, int j, t_tetrim *tetrim)
 {
@@ -31,7 +29,10 @@ static void	quit_tetrim(t_board *cur, int i, int j, t_tetrim *tetrim)
 		new_j = j + (tetrim->points[k]->y - tetrim->root->y);
 		if (new_i < cur->square && new_j < cur->square &&
 				cur->map[new_i][new_j] == tetrim->name)
+		{
 			cur->map[new_i][new_j] = '.';
+			cur->square_tab[ft_mathmax(new_i, new_j)]--;
+		}
 		k++;
 	}
 }
@@ -58,6 +59,7 @@ static int	is_valid(t_board *cur, int i, int j, t_tetrim *tetrim)
 			return (0);
 		}
 		cur->map[new_i][new_j] = tetrim->name;
+		cur->square_tab[ft_mathmax(new_i, new_j)]++;
 		k++;
 	}
 	return (1);
@@ -66,6 +68,8 @@ static int	is_valid(t_board *cur, int i, int j, t_tetrim *tetrim)
 /*
 ** description:
 */
+
+/*
 static int	is_optimal(t_board *sol)
 {
 	int		nb_tetri;
@@ -73,7 +77,7 @@ static int	is_optimal(t_board *sol)
 	int		i;
 	int		j;
 
-	if (optimal)
+	if (sol->optimal)
 		return (1);
 	i = -1;
 	sqrt = 2;
@@ -93,19 +97,17 @@ static int	is_optimal(t_board *sol)
 	}
 	return (0);
 }
+*/
 
 static int	fillit_rcs(t_board *cur, t_board *sol, t_tetrim **tetrims, int pos)
 {
 	int i;
 	int j;
-
+	
 	if (pos == (cur->size / 2) - 1)
 	{
 		if ((cur->square = calc_square(cur)) < sol->square)
-		{
 			clone_board(sol, cur);
-			optimal = is_optimal(sol);
-		}
 		return (1);
 	}
 	i = -1;
@@ -114,12 +116,10 @@ static int	fillit_rcs(t_board *cur, t_board *sol, t_tetrim **tetrims, int pos)
 		j = -1;
 		while (++j < cur->square)
 		{
-	//		if (optimal)
-	//			return ;
 			if(is_valid(cur, i, j, tetrims[pos]))
 			{
 				if (calc_square(cur) < sol->square)
-					if (fillit_rcs(cur, sol, tetrims, pos + 1) && optimal)
+					if (fillit_rcs(cur, sol, tetrims, pos + 1) && sol->square == sol->optimal)
 						return (1);
 				quit_tetrim(cur, i, j, tetrims[pos]);
 			}
@@ -136,8 +136,6 @@ void		fillit(t_board *solution, t_tetrim **tetrims)
 {
 	t_board *current;
 
-	counter = 0;
-	optimal = 0;
 	current = create_board(solution->size);
 	fillit_rcs(current, solution, tetrims, 0);
 	free_board(current);

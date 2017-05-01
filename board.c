@@ -42,6 +42,16 @@ void		print_board(t_board *board)
 int			calc_square(t_board *board)
 {
 	int i;
+
+	i = board->size - 1;
+	while (i && board->square_tab[i] == 0)
+		i--;
+	return (i + 1);
+}
+/*
+int			calc_square(t_board *board)
+{
+	int i;
 	int j;
 	int square;
 
@@ -49,7 +59,7 @@ int			calc_square(t_board *board)
 	square = 0;
 	while (i < board->square)
 	{
-		j = 0;
+		j = 0 - 1;
 		while (j < board->square)
 		{
 			if (board->map[i][j] != '.' && (i > square || j > square))
@@ -60,7 +70,7 @@ int			calc_square(t_board *board)
 	}
 	return (square + 1);
 }
-
+*/
 /*
 ** description:
 */
@@ -98,6 +108,7 @@ void		free_board(t_board *board)
 		ft_memdel((void**)&(board->map[i]));
 		i++;
 	}
+	ft_memdel((void**)&(board->square_tab));
 	ft_memdel((void**)&(board->map));
 	ft_memdel((void**)&board);
 }
@@ -105,6 +116,17 @@ void		free_board(t_board *board)
 /*
 ** description:
 */
+static int	calc_optimal(int size)
+{
+	int blocks;
+	int pow;
+
+	blocks = ((size / 2) - 1) * 4;
+	pow = 2;
+	while ((pow * pow) < blocks)
+		pow++;
+	return (pow);
+}
 
 t_board		*create_board(int size)
 {
@@ -115,10 +137,13 @@ t_board		*create_board(int size)
 	new = (t_board*)malloc(sizeof(t_board));
 	new->size = size;
 	new->square = size;
+	new->optimal = calc_optimal(size);
 	i = 0;
 	new->map = (char**)malloc((size + 1) * sizeof(char*));
+	new->square_tab = (int*)malloc(size * sizeof(int));
 	while (i < size)
 	{
+		new->square_tab[i] = 0;
 		new->map[i] = (char*)malloc(size * sizeof(char));
 		j = 0;
 		while (j < size)

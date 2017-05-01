@@ -49,6 +49,8 @@ typedef struct	s_board
 {
 	int		size;
 	int		square;
+	int		*square_tab;
+	int		optimal;
 	char	**map;
 }				t_board;
 
