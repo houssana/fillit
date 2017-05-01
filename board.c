@@ -43,7 +43,7 @@ int			calc_square(t_board *board)
 {
 	int i;
 
-	i = board->size - 1;
+	i = board->square - 1;
 	while (i && board->square_tab[i] == 0)
 		i--;
 	return (i + 1);
@@ -138,20 +138,16 @@ t_board		*create_board(int size)
 	new->size = size;
 	new->square = size;
 	new->optimal = calc_optimal(size);
-	i = 0;
+	i = -1;
 	new->map = (char**)malloc((size + 1) * sizeof(char*));
 	new->square_tab = (int*)malloc(size * sizeof(int));
-	while (i < size)
+	while (++i < size)
 	{
 		new->square_tab[i] = 0;
 		new->map[i] = (char*)malloc(size * sizeof(char));
-		j = 0;
-		while (j < size)
-		{
+		j = -1;
+		while (++j < size)
 			new->map[i][j] = '.';
-			j++;
-		}
-		i++;
 	}
 	return (new);
 }
